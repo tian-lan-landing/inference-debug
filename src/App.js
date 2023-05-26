@@ -7,6 +7,13 @@ import {
 } from "@landingai-js/react";
 import { useState } from "react";
 
+const DEV_API_INFO = {
+  endpoint:
+    "https://predict.app.dev.landing.ai/inference/v1/predict?endpoint_id=034f820c-1eb2-40b4-9d30-3a78ea1301b1",
+  key: "0qbeqmimfgst9uhm97zzck8f0d8dp8n",
+  secret: "dm3cu8wjdsf9lybozi3iprar8e91ngk2snta6fkyxufcb0seizylog2mm96z2q"
+};
+
 const API_INFO = {
   endpoint:
     "https://predict.app.landing.ai/inference/v1/predict?endpoint_id=a39e85c1-621c-4f37-94b3-fb7bba9c2c07",
@@ -17,7 +24,7 @@ const API_INFO = {
 export default function App() {
   const [image, setImage] = useState();
   return (
-    <InferenceContext.Provider value={API_INFO}>
+    <InferenceContext.Provider value={DEV_API_INFO}>
       <div className="App">
         <PhotoCollector setImage={setImage} />
         <InferenceResult image={image} />
