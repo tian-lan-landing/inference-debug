@@ -1,15 +1,18 @@
 import "./App.css";
+import { SnackbarProvider, enqueueSnackbar, closeSnackbar } from 'notistack';
+import React, { useEffect } from 'react';
 
 import {
   InferenceContext,
   InferenceResult,
   PhotoCollector
-} from "@landingai-js/react";
+} from "landingai-react";
 import { useState } from "react";
 
 const DEV_API_INFO = {
   endpoint:
     "https://predict.app.dev.landing.ai/inference/v1/predict?endpoint_id=034f820c-1eb2-40b4-9d30-3a78ea1301b1",
+    // "https://predict.app.dev.landing.ai/inference/v1/predict?endpoint_id=034f820c-1eb2-40b4-9d30-3a78ea1301b1",
   key: "0qbeqmimfgst9uhm97zzck8f0d8dp8n",
   secret: "dm3cu8wjdsf9lybozi3iprar8e91ngk2snta6fkyxufcb0seizylog2mm96z2q"
 };
@@ -23,12 +26,26 @@ const API_INFO = {
 
 export default function App() {
   const [image, setImage] = useState();
+  const [showLabels, setLabels] = useState(false);
   return (
+    <React.StrictMode>
     <InferenceContext.Provider value={DEV_API_INFO}>
+      <SnackbarProvider
+        action={(key) => (
+          <div onClick={() => closeSnackbar(key)} style={{ padding: '2px 10px' }}> ✖ </div>
+        )}
+      />
       <div className="App">
         <PhotoCollector setImage={setImage} />
-        <InferenceResult image={image} />
+        <label>
+          Show labels: <input type="checkbox" checked={showLabels} onChange={e => setLabels(prev => !prev)} />
+        </label>
+        <InferenceResult image={image} showLabels={showLabels} onPredictError={err => {
+          console.error(err);
+          enqueueSnackbar(err.body?.message ?? err.message, { variant: 'error', autoHideDuration: 12000, preventDuplicate: true });
+        }} />
       </div>
     </InferenceContext.Provider>
+    </React.StrictMode>
   );
 }
