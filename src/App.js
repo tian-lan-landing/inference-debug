@@ -17,6 +17,12 @@ const DEV_API_INFO = {
   secret: "dm3cu8wjdsf9lybozi3iprar8e91ngk2snta6fkyxufcb0seizylog2mm96z2q"
 };
 
+const STAGING_API_INFO = {
+  endpoint: 'https://predict.app.staging.landing.ai/inference/v1/predict?endpoint_id=33ad35f6-177f-431f-99e9-90c630ee6251',
+  key: 'vzdh6madcy8n8br2b10k23aspajlk72',
+  secret: 'xi3lum0fhlqnnbboxhnnr04556iquu9ue2z84eeqphothaqo88xwq3wb43bu5o',
+};
+
 const API_INFO = {
   endpoint:
     "https://predict.app.landing.ai/inference/v1/predict?endpoint_id=a39e85c1-621c-4f37-94b3-fb7bba9c2c07",
