@@ -1,6 +1,6 @@
 import "./App.css";
 import { SnackbarProvider, enqueueSnackbar, closeSnackbar } from 'notistack';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import {
   InferenceContext,
@@ -11,8 +11,9 @@ import { useState } from "react";
 
 const DEV_API_INFO = {
   endpoint:
-    "https://predict.app.dev.landing.ai/inference/v1/predict?endpoint_id=034f820c-1eb2-40b4-9d30-3a78ea1301b1",
-    // "https://predict.app.dev.landing.ai/inference/v1/predict?endpoint_id=034f820c-1eb2-40b4-9d30-3a78ea1301b1",
+    // "https://predict.app.dev.landing.ai/inference/v1/predict?endpoint_id=275268aa-4d63-4ad3-8781-d014daefbf15", // Seg
+    "https://predict.app.dev.landing.ai/inference/v1/predict?endpoint_id=76eda926-ea2c-4a84-a671-748414397077", // VP
+    // "https://predict.app.dev.landing.ai/inference/v1/predict?endpoint_id=034f820c-1eb2-40b4-9d30-3a78ea1301b1", // Box
   key: "land_sk_2slQ3CgztQndxmAWkiJLGdpb6gXVuAuqVzSgEOpFKNUrYtuka2",
   // key: "0qbeqmimfgst9uhm97zzck8f0d8dp8n",
   // secret: "dm3cu8wjdsf9lybozi3iprar8e91ngk2snta6fkyxufcb0seizylog2mm96z2q"
@@ -44,9 +45,9 @@ export default function App() {
       />
       <div className="App">
         <PhotoCollector setImage={setImage} />
-        <label>
+        {/* <label>
           Show labels: <input type="checkbox" checked={showLabels} onChange={e => setLabels(prev => !prev)} />
-        </label>
+        </label> */}
         <InferenceResult image={image} showLabels={showLabels} onPredictError={err => {
           console.error(err);
           enqueueSnackbar(err.body?.message ?? err.message, { variant: 'error', autoHideDuration: 12000, preventDuplicate: true });
